@@ -38,4 +38,36 @@ Aktivitas yang disimulasikan dalam lab ini dipetakan ke dalam framework MITRE AT
 ## 💡 Conclusion
 Pemantauan *Event ID 4104* sangat krusial dalam *digital forensics* karena memungkinkan *Security Analyst* untuk melihat perintah PowerShell apa saja yang dieksekusi oleh pengguna atau proses latar belakang, bahkan ketika file *script* sudah dihapus.
 
+##📌 Pengertian Log
+Log dalam konteks keamanan siber (security) adalah catatan digital yang terstruktur, kronologis, dan dihasilkan secara otomatis mengenai aktivitas, peristiwa, serta transaksi yang terjadi di dalam sistem komputer, jaringan, atau aplikasi bisa juga dikenal sebagai log peristiwa keamanan adalah catatan digital dari aktivitas dan peristiwa sistem, seperti upaya login, perubahan kebijakan, dan akses ke data sensitif. Log ini dikumpulkan dari berbagai sumber seperti basis data, server, workstation, dan firewall, dan memberikan gambaran kronologis tentang apa yang terjadi dalam sistem.
 
+##🧠 Fungsi Log
+
+Log digunakan untuk:
+
+1. Debugging (memperbaiki error)
+Membantu developer mengetahui apa yang salah dalam program.
+2. Monitoring sistem
+Melihat apakah sistem berjalan normal atau tidak.
+3. Audit (jejak aktivitas)
+Mencatat aktivitas user atau sistem (siapa melakukan apa).
+4. Analisis performa
+Mengetahui bottleneck atau masalah performa.
+
+##📊 Contoh Format Log Windows (Umum)
+Biasanya log Windows memiliki struktur seperti ini:
+```
+Date: 28/04/2026
+Time: 10:15:32
+Level: Error / Information / Warning
+Source: Service Name
+Event ID: 1234
+Message: Deskripsi kejadian
+```
+##💻 Contoh Log di Linux (tambahan untuk perbandingan)
+Contoh log linux ada di:
+📁 /var/log/
+```
+Apr 28 10:15:32 server sshd[1234]: Failed password for root
+Apr 28 10:16:10 server kernel: CPU temperature high
+```
