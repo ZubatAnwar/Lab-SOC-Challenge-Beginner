@@ -27,17 +27,6 @@ Aktivitas yang disimulasikan dalam lab ini dipetakan ke dalam framework MITRE AT
 * **Tactic:** Discovery (TA0007)
 * **Technique:** Account Discovery: Local Account (T1087.001)
 
-## 📝 Methodology
-1. **Configuration:** Mengaktifkan `EnableScriptBlockLogging` melalui Registry Editor untuk merekam eksekusi PowerShell di tingkat sistem.
-2. **Simulation:** Menjalankan `Get-LocalUser` untuk mensimulasikan fase *Discovery* dari serangan.
-3. **Detection:** Memfilter *PowerShell Operational Logs* mencari **Event ID 4104** untuk menemukan *ScriptBlockText* yang cocok dengan perintah simulasi.
-
-## 📸 Artifacts / Proof of Concept
-(Masukkan screenshot Event Viewer kamu di sini yang menampilkan Event ID 4104)
-
-## 💡 Conclusion
-Pemantauan *Event ID 4104* sangat krusial dalam *digital forensics* karena memungkinkan *Security Analyst* untuk melihat perintah PowerShell apa saja yang dieksekusi oleh pengguna atau proses latar belakang, bahkan ketika file *script* sudah dihapus.
-
 ##📌 Pengertian Log
 Log dalam konteks keamanan siber (security) adalah catatan digital yang terstruktur, kronologis, dan dihasilkan secara otomatis mengenai aktivitas, peristiwa, serta transaksi yang terjadi di dalam sistem komputer, jaringan, atau aplikasi bisa juga dikenal sebagai log peristiwa keamanan adalah catatan digital dari aktivitas dan peristiwa sistem, seperti upaya login, perubahan kebijakan, dan akses ke data sensitif. Log ini dikumpulkan dari berbagai sumber seperti basis data, server, workstation, dan firewall, dan memberikan gambaran kronologis tentang apa yang terjadi dalam sistem.
 
@@ -55,19 +44,171 @@ Mencatat aktivitas user atau sistem (siapa melakukan apa).
 Mengetahui bottleneck atau masalah performa.
 
 ##📊 Contoh Format Log Windows (Umum)
-Biasanya log Windows memiliki struktur seperti ini:
+🪟 Log pada Windows
 ```
-Date: 28/04/2026
-Time: 10:15:32
-Level: Error / Information / Warning
-Source: Service Name
-Event ID: 1234
-Message: Deskripsi kejadian
+Di Windows, log disimpan dalam Event Viewer.
 ```
+Jenis log utama:
+
+`Application Log` → dari aplikasi
+`System Log` → dari sistem operasi
+`Security Log` → aktivitas login & keamanan
+
+Lokasi akses:
+
+`Event Viewer` → Windows Logs
+📌 Contoh Log Windows
+```
+Log Name: Security
+Source: Microsoft-Windows-Security-Auditing
+Date: 2026-04-29 10:20:15
+Event ID: 4624
+Task Category: Logon
+Level: Information
+Description:
+An account was successfully logged on.
+
+Account Name: user1
+Source Network Address: 192.168.1.10
+```
+🧠 Penjelasan:
+`Event ID 4624` → login berhasil
+`Account Name` → user yang login
+`Source Network Address` → IP asal
+`Level: Information` → status (bukan error)
+
 ##💻 Contoh Log di Linux (tambahan untuk perbandingan)
 Contoh log linux ada di:
 📁 /var/log/
+Beberapa file log penting:
+
+`/var/log/syslog` → log umum sistem
+`/var/log/auth.log` → aktivitas login & autentikasi
+`/var/log/kern.log` → log kernel
+`/var/log/nginx/access.log` → log akses web server
+
 ```
 Apr 28 10:15:32 server sshd[1234]: Failed password for root
 Apr 28 10:16:10 server kernel: CPU temperature high
+Apr 29 10:15:32 server sshd[1234]: Accepted password for user1 from 192.168.1.10 port 54321 ssh2
 ```
+🧠 Penjelasan:
+`Apr 29 10:15:32` → waktu kejadian
+`server` → nama host/server
+`sshd[1234]` → service (SSH daemon) + PID
+`Accepted password` → aksi (login berhasil)
+```user1``` → user yang login
+`192.168.1.10` → alamat IP asal
+
+👉 Artinya: ada login berhasil ke server melalui SSH.
+
+Tools Populer Untuk Analisis Log:
+🔥 1. Log Management & Observability
+🔹 ELK Stack
+
+Terdiri dari:
+
+Elasticsearch
+Logstash
+Kibana
+
+📌 Digunakan untuk:
+
+Centralized logging
+Search & filtering log
+Dashboard monitoring
+
+🔹 Grafana + Loki
+
+📌 Digunakan untuk:
+
+Monitoring modern (cloud, Kubernetes)
+Visualisasi log & metrics
+Alternatif ringan ELK
+🔹 Graylog
+
+📌 Digunakan untuk:
+
+Centralized log management
+Analisis log skala besar
+UI lebih sederhana dibanding ELK
+⚡ 2. Enterprise & Commercial Tools
+🔹 Splunk
+
+📌 Digunakan untuk:
+
+Big data log analysis
+SIEM (Security Information and Event Management)
+Monitoring enterprise
+
+👉 Sangat populer di perusahaan besar
+
+🔹 Datadog
+
+📌 Digunakan untuk:
+
+Monitoring cloud (AWS, Azure, GCP)
+Log + metrics + tracing
+Observability all-in-one
+🔹 New Relic
+
+📌 Digunakan untuk:
+
+Application performance monitoring (APM)
+Log & tracing
+Debugging aplikasi production
+🛡️ 3. Security & SIEM Tools
+🔹 Wazuh
+
+📌 Digunakan untuk:
+
+Threat detection
+Intrusion detection (HIDS)
+Security log analysis
+🔹 OSSEC
+
+📌 Digunakan untuk:
+
+Monitoring keamanan host
+Deteksi perubahan file
+Analisis log security
+🔹 IBM QRadar
+
+📌 Digunakan untuk:
+
+SIEM enterprise
+Analisis ancaman
+Korelasi log keamanan
+🔹 ArcSight
+
+📌 Digunakan untuk:
+
+Security monitoring skala besar
+Compliance & audit
+☁️ 4. Cloud-Native Logging
+🔹 AWS CloudWatch
+
+📌 Digunakan untuk:
+
+Monitoring AWS resources
+Log aplikasi cloud
+🔹 Google Cloud Logging
+
+📌 Digunakan untuk:
+
+Log di Google Cloud
+Integrasi dengan GCP services
+🔹 Azure Monitor
+
+📌 Digunakan untuk:
+
+Monitoring cloud Azure
+Log analytics
+🧰 5. Tools Pendukung (Linux CLI)
+
+Digunakan untuk analisis cepat:
+
+`grep` → cari log
+`tail` → lihat log real-time
+`awk` → parsing
+`sed` → manipulasi teks
