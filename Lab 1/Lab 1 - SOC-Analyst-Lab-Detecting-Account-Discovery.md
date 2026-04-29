@@ -1,4 +1,4 @@
-#**Lab ke-1 SOC-Analyst-Lab-Detecting-Account-Discovery**
+#**Lab ke-1 SOC-Analyst-Lab**
 
 # 🔍 SOC Analyst Lab: Windows Event Log Analysis & PowerShell Execution Detection
 
@@ -27,10 +27,10 @@ Aktivitas yang disimulasikan dalam lab ini dipetakan ke dalam framework MITRE AT
 * **Tactic:** Discovery (TA0007)
 * **Technique:** Account Discovery: Local Account (T1087.001)
 
-##📌 Pengertian Log
+## 📌 Pengertian Log
 Log dalam konteks keamanan siber (security) adalah catatan digital yang terstruktur, kronologis, dan dihasilkan secara otomatis mengenai aktivitas, peristiwa, serta transaksi yang terjadi di dalam sistem komputer, jaringan, atau aplikasi bisa juga dikenal sebagai log peristiwa keamanan adalah catatan digital dari aktivitas dan peristiwa sistem, seperti upaya login, perubahan kebijakan, dan akses ke data sensitif. Log ini dikumpulkan dari berbagai sumber seperti basis data, server, workstation, dan firewall, dan memberikan gambaran kronologis tentang apa yang terjadi dalam sistem.
 
-##🧠 Fungsi Log
+## 🧠 Fungsi Log
 
 Log digunakan untuk:
 
@@ -43,7 +43,7 @@ Mencatat aktivitas user atau sistem (siapa melakukan apa).
 4. Analisis performa
 Mengetahui bottleneck atau masalah performa.
 
-##📊 Contoh Format Log Windows (Umum)
+## 📊 Contoh Format Log Windows (Umum)
 🪟 Log pada Windows
 ```
 Di Windows, log disimpan dalam Event Viewer.
@@ -77,7 +77,7 @@ Source Network Address: 192.168.1.10
 - `Source Network Address` → IP asal
 - `Level: Information` → status (bukan error)
 
-##💻 Contoh Log di Linux (tambahan untuk perbandingan)
+## 💻 Contoh Log di Linux (tambahan untuk perbandingan)
 Contoh log linux ada di:
 📁 /var/log/
 Beberapa file log penting:
@@ -222,3 +222,13 @@ Digunakan untuk analisis cepat:
 - `tail` → lihat log real-time
 - `awk` → parsing
 - `sed` → manipulasi teks
+
+##**Praktikum:**
+Untuk lab ini perlu disiapkan beberapa alat untuk melakukan analisis, jadi lab ini tidak menggunakan Group Policy Editor (gpedit.msc) tapi menggunakan jalan pintas/alternatif yaitu Registry Editor.
+
+##**Penjelasan Lab**
+Sistem operasi selalu mencatat aktivitas penting dalam bentuk *log*. Di Windows dikelola oleh *Event Viewer*.
+**Skenario** nya ilalah seorang hacker berhasil masuk ke dalam sebuah sistem, salah satu hal yang pertama dilalkukan adalah mencari tahu "Siapa saja yang ada dalam sistem ini?". Perintah `Get-LocalUser` di PowerShell digunakan untuk mendaftar semua akun pengguna dikomputer.
+##**Tujuan Lab** bertindak menjadi hacker untuk menjalankan `Get-LocalUser` dan juga menjadi sebagai Defender/SOC Analyst (Menemukan jejak perintah tersebut di log windows untuk membuktikan ada aktivitas mencurigakan yang terjadi). 
+
+##**Windows**
