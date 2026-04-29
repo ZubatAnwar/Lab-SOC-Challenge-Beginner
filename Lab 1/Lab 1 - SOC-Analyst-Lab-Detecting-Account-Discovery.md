@@ -199,13 +199,14 @@ Terdiri dari:
 
 - Monitoring AWS resources
 - Log aplikasi cloud
-- 
+  
 🔹 Google Cloud Logging
 
 📌 Digunakan untuk:
 
 - Log di Google Cloud
 - Integrasi dengan GCP services
+  
 🔹 Azure Monitor
 
 📌 Digunakan untuk:
@@ -217,7 +218,7 @@ Terdiri dari:
 
 Digunakan untuk analisis cepat:
 
--`grep` → cari log
--`tail` → lihat log real-time
--`awk` → parsing
--`sed` → manipulasi teks
+- `grep` → cari log
+- `tail` → lihat log real-time
+- `awk` → parsing
+- `sed` → manipulasi teks
