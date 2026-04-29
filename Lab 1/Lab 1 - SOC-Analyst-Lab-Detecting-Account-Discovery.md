@@ -50,9 +50,9 @@ Di Windows, log disimpan dalam Event Viewer.
 ```
 Jenis log utama:
 
-`Application Log` → dari aplikasi
-`System Log` → dari sistem operasi
-`Security Log` → aktivitas login & keamanan
+- `Application Log` → dari aplikasi
+- `System Log` → dari sistem operasi
+- `Security Log` → aktivitas login & keamanan
 
 Lokasi akses:
 
@@ -72,20 +72,20 @@ Account Name: user1
 Source Network Address: 192.168.1.10
 ```
 🧠 Penjelasan:
-`Event ID 4624` → login berhasil
-`Account Name` → user yang login
-`Source Network Address` → IP asal
-`Level: Information` → status (bukan error)
+- `Event ID 4624` → login berhasil
+- `Account Name` → user yang login
+- `Source Network Address` → IP asal
+- `Level: Information` → status (bukan error)
 
 ##💻 Contoh Log di Linux (tambahan untuk perbandingan)
 Contoh log linux ada di:
 📁 /var/log/
 Beberapa file log penting:
 
-`/var/log/syslog` → log umum sistem
-`/var/log/auth.log` → aktivitas login & autentikasi
-`/var/log/kern.log` → log kernel
-`/var/log/nginx/access.log` → log akses web server
+- `/var/log/syslog` → log umum sistem
+- `/var/log/auth.log` → aktivitas login & autentikasi
+- `/var/log/kern.log` → log kernel
+- `/var/log/nginx/access.log` → log akses web server
 
 ```
 Apr 28 10:15:32 server sshd[1234]: Failed password for root
@@ -93,122 +93,131 @@ Apr 28 10:16:10 server kernel: CPU temperature high
 Apr 29 10:15:32 server sshd[1234]: Accepted password for user1 from 192.168.1.10 port 54321 ssh2
 ```
 🧠 Penjelasan:
-`Apr 29 10:15:32` → waktu kejadian
-`server` → nama host/server
-`sshd[1234]` → service (SSH daemon) + PID
-`Accepted password` → aksi (login berhasil)
-```user1``` → user yang login
-`192.168.1.10` → alamat IP asal
+- `Apr 29 10:15:32` → waktu kejadian
+- `server` → nama host/server
+- `sshd[1234]` → service (SSH daemon) + PID
+- `Accepted password` → aksi (login berhasil)
+- `user1` → user yang login
+- `192.168.1.10` → alamat IP asal
 
 👉 Artinya: ada login berhasil ke server melalui SSH.
 
 Tools Populer Untuk Analisis Log:
+
 🔥 1. Log Management & Observability
 🔹 ELK Stack
 
 Terdiri dari:
 
-Elasticsearch
-Logstash
-Kibana
+- Elasticsearch
+- Logstash
+- Kibana
 
 📌 Digunakan untuk:
 
-Centralized logging
-Search & filtering log
-Dashboard monitoring
+- Centralized logging
+- Search & filtering log
+- Dashboard monitoring
 
 🔹 Grafana + Loki
 
 📌 Digunakan untuk:
 
-Monitoring modern (cloud, Kubernetes)
-Visualisasi log & metrics
-Alternatif ringan ELK
+- Monitoring modern (cloud, Kubernetes)
+- Visualisasi log & metrics
+- Alternatif ringan ELK
+  
 🔹 Graylog
 
 📌 Digunakan untuk:
 
-Centralized log management
-Analisis log skala besar
-UI lebih sederhana dibanding ELK
+- Centralized log management
+- Analisis log skala besar
+- UI lebih sederhana dibanding ELK
+  
 ⚡ 2. Enterprise & Commercial Tools
 🔹 Splunk
 
 📌 Digunakan untuk:
 
-Big data log analysis
-SIEM (Security Information and Event Management)
-Monitoring enterprise
-
-👉 Sangat populer di perusahaan besar
+- Big data log analysis
+- SIEM (Security Information and Event Management)
+- Monitoring enterprise
 
 🔹 Datadog
 
 📌 Digunakan untuk:
 
-Monitoring cloud (AWS, Azure, GCP)
-Log + metrics + tracing
-Observability all-in-one
+- Monitoring cloud (AWS, Azure, GCP)
+- Log + metrics + tracing
+- Observability all-in-one
+  
 🔹 New Relic
 
 📌 Digunakan untuk:
 
-Application performance monitoring (APM)
-Log & tracing
-Debugging aplikasi production
+- Application performance monitoring (APM)
+- Log & tracing
+- Debugging aplikasi production
+  
 🛡️ 3. Security & SIEM Tools
 🔹 Wazuh
 
 📌 Digunakan untuk:
 
-Threat detection
-Intrusion detection (HIDS)
-Security log analysis
+- Threat detection
+- Intrusion detection (HIDS)
+- Security log analysis
+  
 🔹 OSSEC
 
 📌 Digunakan untuk:
 
-Monitoring keamanan host
-Deteksi perubahan file
-Analisis log security
+- Monitoring keamanan host
+- Deteksi perubahan file
+- Analisis log security
+  
 🔹 IBM QRadar
 
 📌 Digunakan untuk:
 
-SIEM enterprise
-Analisis ancaman
-Korelasi log keamanan
+- SIEM enterprise
+- Analisis ancaman
+- Korelasi log keamanan
+  
 🔹 ArcSight
 
 📌 Digunakan untuk:
 
-Security monitoring skala besar
-Compliance & audit
+- Security monitoring skala besar
+- Compliance & audit
+  
 ☁️ 4. Cloud-Native Logging
 🔹 AWS CloudWatch
 
 📌 Digunakan untuk:
 
-Monitoring AWS resources
-Log aplikasi cloud
+- Monitoring AWS resources
+- Log aplikasi cloud
+- 
 🔹 Google Cloud Logging
 
 📌 Digunakan untuk:
 
-Log di Google Cloud
-Integrasi dengan GCP services
+- Log di Google Cloud
+- Integrasi dengan GCP services
 🔹 Azure Monitor
 
 📌 Digunakan untuk:
 
-Monitoring cloud Azure
-Log analytics
+- Monitoring cloud Azure
+-Log analytics
+
 🧰 5. Tools Pendukung (Linux CLI)
 
 Digunakan untuk analisis cepat:
 
-`grep` → cari log
-`tail` → lihat log real-time
-`awk` → parsing
-`sed` → manipulasi teks
+-`grep` → cari log
+-`tail` → lihat log real-time
+-`awk` → parsing
+-`sed` → manipulasi teks
