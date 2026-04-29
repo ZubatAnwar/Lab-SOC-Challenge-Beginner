@@ -228,7 +228,9 @@ Untuk lab ini perlu disiapkan beberapa alat untuk melakukan analisis, jadi lab i
 
 ##**Penjelasan Lab**
 Sistem operasi selalu mencatat aktivitas penting dalam bentuk *log*. Di Windows dikelola oleh *Event Viewer*.
-**Skenario** nya ilalah seorang hacker berhasil masuk ke dalam sebuah sistem, salah satu hal yang pertama dilalkukan adalah mencari tahu "Siapa saja yang ada dalam sistem ini?". Perintah `Get-LocalUser` di PowerShell digunakan untuk mendaftar semua akun pengguna dikomputer.
-##**Tujuan Lab** bertindak menjadi hacker untuk menjalankan `Get-LocalUser` dan juga menjadi sebagai Defender/SOC Analyst (Menemukan jejak perintah tersebut di log windows untuk membuktikan ada aktivitas mencurigakan yang terjadi). 
+**Skenario**
+Seorang hacker berhasil masuk ke dalam sebuah sistem, salah satu hal yang pertama dilalkukan adalah mencari tahu "Siapa saja yang ada dalam sistem ini?". Perintah `Get-LocalUser` di PowerShell digunakan untuk mendaftar semua akun pengguna dikomputer.
+##**Tujuan Lab** 
+Bertindak menjadi hacker untuk menjalankan `Get-LocalUser` dan juga menjadi sebagai Defender/SOC Analyst (Menemukan jejak perintah tersebut di log windows untuk membuktikan ada aktivitas mencurigakan yang terjadi). 
 
 ##**Windows**
