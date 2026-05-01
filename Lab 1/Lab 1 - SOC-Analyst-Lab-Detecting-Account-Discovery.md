@@ -57,6 +57,7 @@ Jenis log utama:
 Lokasi akses:
 
 `Event Viewer` → Windows Logs
+
 📌 Contoh Log Windows
 ```
 Log Name: Security
