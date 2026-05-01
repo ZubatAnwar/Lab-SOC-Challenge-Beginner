@@ -227,6 +227,7 @@ Digunakan untuk analisis cepat:
 Untuk lab ini perlu disiapkan beberapa alat untuk melakukan analisis, jadi lab ini **tidak menggunakan Group Policy Editor (gpedit.msc)**. tapi menggunakan jalan pintas/alternatif yaitu **Registry Editor**.
 
 **Catatan**
+
 🔧 Group Policy Editor (gpedit)
 - Antarmuka berbasis GUI (lebih ramah pengguna)
 - Digunakan untuk mengatur kebijakan sistem (policy) secara terstruktur
