@@ -105,6 +105,7 @@ Apr 29 10:15:32 server sshd[1234]: Accepted password for user1 from 192.168.1.10
 Tools Populer Untuk Analisis Log:
 
 🔥 1. Log Management & Observability
+
 🔹 ELK Stack
 
 Terdiri dari:
