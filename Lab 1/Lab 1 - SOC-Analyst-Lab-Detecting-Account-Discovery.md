@@ -255,3 +255,43 @@ Seorang hacker berhasil masuk ke dalam sebuah sistem, salah satu hal yang pertam
 Bertindak menjadi hacker untuk menjalankan `Get-LocalUser` dan juga menjadi sebagai Defender/SOC Analyst (Menemukan jejak perintah tersebut di log windows untuk membuktikan ada aktivitas mencurigakan yang terjadi). 
 
 ## **Windows**
+1. **Mengaktifkan Logging via Registry Editor (regedit).**
+   - Buka **Registry Editor** melalui pencarian atau bisa lewat Windows + R ketik **(regedit)** pilih yes jika ada UAC         (User Access Control).
+   - Navigasi path (jalur) satu per satu di panel sebelah kiri.
+     `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows`
+   - Cek terlebih dahulu apakah ada folder **PowerShell**. jika tidak ada buat.
+      - Klik kanan pada folder **Windows -> New -> Key**. Beri nama **PowerShell**.
+   - Klik kanan pada folder **PowerShell -> New -> Key**. Beri nama **ScriptBlockLogging**.
+   - Klik pada folder **ScriptBlockLogging** yang dibuat. Di panel sebelah kanan yang kosong, klik kanan **-> New ->          DWORD (32-bit)** Value.
+   - Beri nama **EnableScriptBlockLogging**.
+   - Klik ganda pada `EnableScriptBlockLogging`, ubah value data menjadi `1`, lalu OK.
+   - Tutup Registry Editor dan *Restart*  Komputer agar efek berjalan.
+     
+2. **Menajalankan Pertintah (Simulasi).**
+   - Buka **PowerShell** sebagai Administrator.
+   - Jalankan perintah:
+     `Get-LocalUser | Select-Object Name, Enabled`
+     
+     digunakan untuk menampilkan informasi akun pengguna lokal di Windows.
+     
+     1. `Get-LocalUser`
+        - Ini adalah cmdlet PowerShell untuk mengambil daftar user lokal yang ada di komputer.
+        - Output-nya biasanya berisi berbagai properti seperti nama akun, status, deskripsi, dll.
+        
+     3. `|`
+        - Simbol ini disebut pipeline.
+        - Fungsinya untuk mengirim hasil dari perintah di sebelah kiri ke perintah di sebelah kanan.
+        - Jadi, output dari Get-LocalUser diteruskan ke Select-Object.
+        
+     5. `Select-Object Name, Enabled`
+        - Digunakan untuk memilih hanya properti tertentu dari output.
+        - Dalam hal ini:
+        - Name → nama akun user
+        - Enabled → status apakah akun aktif (True) atau nonaktif (False).
+        
+3. **Mendetksi Log Di Event Viewer.**
+   - Buka **Even Viewer** melalui pencarian atau bisa lewat Windows + R ketik **(eventvwr.msc)** pilih yes jika ada UAC       (User Access Control).
+   - Masuk ke panel sebelah kiri: **Applications and Services Logs -> Microsoft -> Windows -> PowerShell ->                   Operational**.
+   - Di panel sebelah kanan, klik **Filter Current Log..**
+   - Di kolonm Includes/Excludes Event IDs, ketik **4104** dan klik OK.
+   - Cari Log terbaru (lihat jamnya). Dibagian *General* atau *Details*, kamu akan melihat ScriptBlockText yang berisi        perintah `Get-LocalUser | Select-Object Name, Enabled`.
