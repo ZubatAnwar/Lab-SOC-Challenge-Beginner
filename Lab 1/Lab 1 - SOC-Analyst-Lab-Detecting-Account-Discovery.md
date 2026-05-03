@@ -300,7 +300,7 @@ Bertindak menjadi hacker untuk menjalankan `Get-LocalUser` dan juga menjadi seba
 
         <img width="547" height="157" alt="Cuplikan layar 2026-05-03 165924" src="https://github.com/user-attachments/assets/01957323-c3a9-4f87-b28a-2ff8e1f2a100" />
 
-3. **Mendetksi Log Di Event Viewer.**
+3. **Mendeteksi Log Di Event Viewer.**
    - Buka **Even Viewer** melalui pencarian atau bisa lewat Windows + R ketik **(eventvwr.msc)** pilih yes jika ada UAC (User Access Control).
    - Masuk ke panel sebelah kiri: **Applications and Services Logs -> Microsoft -> Windows -> PowerShell -> Operational**.
    - Di panel sebelah kanan, klik **Filter Current Log..**
@@ -308,3 +308,5 @@ Bertindak menjadi hacker untuk menjalankan `Get-LocalUser` dan juga menjadi seba
    - Cari Log terbaru (lihat jamnya). Dibagian *General* atau *Details*, kamu akan melihat ScriptBlockText yang berisi perintah `Get-LocalUser | Select-Object Name, Enabled`.
 
 <img width="1236" height="939" alt="Cuplikan layar 2026-05-03 170002" src="https://github.com/user-attachments/assets/a632128b-42a1-40c0-9c8c-8e6916c3b87d" />
+
+                                                                               **----------------------------------------------------**
