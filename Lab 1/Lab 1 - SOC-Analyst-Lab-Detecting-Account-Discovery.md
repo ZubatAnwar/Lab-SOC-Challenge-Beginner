@@ -309,4 +309,7 @@ Bertindak menjadi hacker untuk menjalankan `Get-LocalUser` dan juga menjadi seba
 
 <img width="1236" height="939" alt="Cuplikan layar 2026-05-03 170002" src="https://github.com/user-attachments/assets/a632128b-42a1-40c0-9c8c-8e6916c3b87d" />
 
-                                                                               **----------------------------------------------------**
+
+
+
+                                                                           **----------------------------------------------------**
