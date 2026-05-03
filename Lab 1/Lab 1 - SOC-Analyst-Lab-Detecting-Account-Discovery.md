@@ -27,6 +27,15 @@ Aktivitas yang disimulasikan dalam lab ini dipetakan ke dalam framework MITRE AT
 * **Tactic:** Discovery (TA0007)
 * **Technique:** Account Discovery: Local Account (T1087.001)
 
+Saat menjalankan perintah Get-LocalUser, dalam standar MITRE, ini diklasifikasikan sebagai:
+
+**Tactic: Discovery (TA0007)** 
+- Penjelasan: Penyerang mencoba menjelajahi dan memahami lingkungan sistem yang baru saja mereka susupi.
+
+**Technique: Account Discovery (T1087) -> Sub-technique: Local Account (T1087.001)**
+
+- Penjelasan: Penyerang mencari daftar akun lokal di sistem tersebut untuk melihat apakah ada akun Administrator yang bisa mereka eksploitasi lebih lanjut.
+
 ## 📌 Pengertian Log
 Log dalam konteks keamanan siber (security) adalah catatan digital yang terstruktur, kronologis, dan dihasilkan secara otomatis mengenai aktivitas, peristiwa, serta transaksi yang terjadi di dalam sistem komputer, jaringan, atau aplikasi bisa juga dikenal sebagai log peristiwa keamanan adalah catatan digital dari aktivitas dan peristiwa sistem, seperti upaya login, perubahan kebijakan, dan akses ke data sensitif. Log ini dikumpulkan dari berbagai sumber seperti basis data, server, workstation, dan firewall, dan memberikan gambaran kronologis tentang apa yang terjadi dalam sistem.
 
