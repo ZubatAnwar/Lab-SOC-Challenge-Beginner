@@ -22,3 +22,38 @@ Penjelasan: Penyerang mencoba mendapatkan username dan password yang sah untuk m
 Sub-Technique: Password Guessing (T1110.001)
 
 Penjelasan: Dalam lab ini, mencoba login berulang kali dengan password yang salah (WrongPassword) adalah representasi dari teknik password guessing.
+
+## 📌 Windows Security Logs
+Windows Security logs adalah catatan aktivitas keamanan yang dibuat oleh sistem operasi Microsoft Windows. Log ini disimpan di Event Viewer dan dipakai untuk memantau kejadian penting terkait keamanan komputer, seperti:
+
+- Successful or failed logins
+- Password changes
+- User account creation or deletion
+- Access attempts to files or resources
+- Administrator activity
+- Programs requesting elevated privileges
+- Antivirus or firewall security events
+
+Windows menggunakan log ini untuk membantu:
+
+- detect suspicious activity or attacks,
+- troubleshoot security issues,
+- audit user activity,
+- and perform forensic investigations after incidents.
+
+## Lokasi melihat Security Logs
+
+Bisa dibuka lewat:
+
+1. Tekan `Win + R`
+
+Ketik:
+
+`eventvwr.msc`
+
+Masuk ke:
+
+`Windows Logs > Security`
+
+Atau lihat dokumentasi resmi Microsoft:
+Windows Event Viewer documentation (https://learn.microsoft.com/id-id/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/basic-security-audit-policy-settings?utm_source=chatgpt.com)
