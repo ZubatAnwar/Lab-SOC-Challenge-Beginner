@@ -47,14 +47,15 @@ Bisa dibuka lewat:
 
 1. Tekan `Win + R`
 
-Ketik:
+2. Ketik:
 
 `eventvwr.msc`
 
-Masuk ke:
+3. Masuk ke:
 
 `Windows Logs > Security`
 
 Atau lihat dokumentasi resmi Microsoft:
 Windows Event Viewer documentation
 (https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/basic-security-audit-policy-settings)
+
