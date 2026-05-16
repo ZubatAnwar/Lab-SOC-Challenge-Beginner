@@ -56,4 +56,5 @@ Masuk ke:
 `Windows Logs > Security`
 
 Atau lihat dokumentasi resmi Microsoft:
-Windows Event Viewer documentation (https://learn.microsoft.com/id-id/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/basic-security-audit-policy-settings?utm_source=chatgpt.com)
+Windows Event Viewer documentation
+(https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/basic-security-audit-policy-settings)
