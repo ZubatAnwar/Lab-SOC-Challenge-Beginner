@@ -74,11 +74,11 @@ https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/default.aspx
 
 ## **Praktikum:**
 Untuk lab ini perlu di siapkan yaitu:
-1. Command Prompt (CMD) / PowerShell
+1. **Command Prompt (CMD) / PowerShell**
 
 Fungsi: Digunakan sebagai jalan pintas (workaround) pengganti lusrmgr.msc untuk membuat user percobaan menggunakan perintah net user. Selain itu, digunakan juga untuk mengeksekusi perintah simulasi serangan gagal login (net use).
 
-2. Windows Event Viewer (`eventvwr.msc`)
+2. **Windows Event Viewer (`eventvwr.msc`)**
 
 Fungsi: Ini adalah tool utama dalam lab ini. Digunakan untuk membaca, memfilter (mencari Event ID 4624 & 4625), dan menganalisis rekam jejak keamanan (Security Logs) pada sistem operasi Windows.
 
@@ -119,7 +119,7 @@ Tool Windows untuk:
 - mapping drive
 - akses resource jaringan (SMB)
   
-🖥️ \\127.0.0.1\IPC$
+🖥️ **\\127.0.0.1\IPC$**
 
 Ini adalah target koneksi:
 
