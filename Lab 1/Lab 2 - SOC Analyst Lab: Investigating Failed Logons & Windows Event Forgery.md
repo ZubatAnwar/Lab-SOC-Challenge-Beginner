@@ -99,6 +99,9 @@ Fokus lab ini ada pada **Security Logs** yang merekam aktivitas terkait keamanan
    `net user haxuser1 PasswordKuat123! /add`
    (*Perintah ini akan membuat user baru bernama haxuser1 dengan password PasswordKuat123!. Pesan "The command completed successfully" akan muncul jika berhasil*).
 
+<img width="542" height="239" alt="Cuplikan layar 2026-05-15 214405" src="https://github.com/user-attachments/assets/d02e3eaa-3c53-42ef-a054-5ed629cf1aa6" />
+
+
 🔍 Event Log yang muncul biasanya:
 
 Kalau ini dijalankan, Windows akan mencatat:
@@ -109,6 +112,9 @@ Kalau ini dijalankan, Windows akan mencatat:
 1. Kamu bisa tetap menggunakan CMD atau buka PowerShell baru.
 2. Masukan perintah ini untuk memaksa sistem mencoba login ke *local network* menggunakan akun tadi, tapi dengan *password* yang disengaja disalahkan:
    `net use \\127.0.0.1\IPC$ /user:haxuser1 WrongPassword`
+
+<img width="674" height="175" alt="Cuplikan layar 2026-05-15 214534" src="https://github.com/user-attachments/assets/5c5079f7-0806-4da5-ae93-14cced32c2f1" />
+
    
 🧩 Penjelasan bagian per bagian
 🌐 net use
@@ -221,3 +227,28 @@ Termasuk kategori:
 👉 Administrative Shares / Hidden Shares
 
 3. Tekan Enter. Kamu akan melihat pesan error seperti "System error 86 has occurred. The specified network password is not correct." Ini berarti simulasi serangan gagal login kita sukses terekam.
+
+**Langkah 3: Mendetksi Log di Event Viewer**
+1. Tekan `Win + R`, ketik `eventvwr.msc`, lalu tekan Enter.
+2. Di panel kiri, navigasikan ke **Windows Logs -> Security.**
+3. Di panel sebelah kanan (Actions), klik **Filter Current Log...**
+4. Pada kolom <All Event IDs>, ketik **4625** dan klik OK.
+5. Kamu akan melihat daftar kejadian gagal login. Klik baris paling atas (yang paling baru).
+6. Di jendela bagian bawah, kamu akan melihat detailnya. Cari tulisan **Account For Which Logon Failed:** pastikan **Account Name**-nya adalah haxuser1.
+
+<img width="1025" height="654" alt="Cuplikan layar 2026-05-15 215016" src="https://github.com/user-attachments/assets/394de8e7-2574-4a05-aef8-5404a857a70d" />
+
+**Langkah Tambahan: Bersihkan Sistem (Opsional)**
+Agar PC kamu tetap rapi, hapus user tadi setelah lab selesai dengan perintah CMD (Run as Admin):
+`net user haxuser1 /delete`
+
+Untuk lab log analysis ini, kita bisa memetakannya ke dalam framework MITRE ATT&CK:
+- **Tactic: Credential Access (TA0006)**
+
+   - Penjelasan: Penyerang mencoba mendapatkan username dan password yang sah untuk masuk ke dalam sistem.
+
+- **Technique: Brute Force (T1110)**
+
+   - Sub-Technique: **Password Guessing (T1110.001)**
+
+   - Penjelasan: Dalam lab ini, mencoba login berulang kali dengan password yang salah (WrongPassword) adalah            representasi dari teknik password guessing.
