@@ -90,7 +90,7 @@ Fokus lab ini ada pada **Security Logs** yang merekam aktivitas terkait keamanan
 
 - **Event ID 4625 (Failed Logon):** Mencatat ketika seseorang gagal masuk karena salah password atau username tidak ada. Jika log ini muncul puluhan atau ratusan kali dalam rentang waktu singkat, ini adalah indikator kuat adanya serangan Brute Force atau tebak password.
 
-**Catatan:** jadi lab ini tidak menggunakan `lusrmgr.msc` karena menggunakan Windows 10/11 Home, kita akan membuat user secara manual menggunakan Command Prompt (CMD) dengak hak akses Administrator.
+**Catatan:** jadi lab ini tidak menggunakan `lusrmgr.msc` karena menggunakan Windows 10/11 Home, kita akan membuat user secara manual menggunakan Command Prompt (CMD) dengan hak akses Administrator.
 
 **Langkah 1: Membuat Test User (`haxuser1`) via CMD**
 1. Klik tombol **Windows🪟**, ketik `cmd`.
@@ -167,7 +167,7 @@ Di Windows Security Log biasanya:
 4625 → Failed logon (kalau password salah)
 4624 → Successful logon (kalau benar)
 
-enapa IPC$ sering dipakai di dunia keamanan?
+Kenapa IPC$ sering dipakai di dunia keamanan?
 
 Perintah seperti ini sering muncul dalam konteks:
 
@@ -226,9 +226,12 @@ Nama resminya:
 Termasuk kategori:
 👉 Administrative Shares / Hidden Shares
 
+💡 Info Tambahan: Apa itu IPC$?
+IPC$ (Inter-Process Communication share) adalah hidden administrative share yang dipakai Windows untuk komunikasi antar proses lewat jaringan (SMB/RPC). Dalam dunia security, jalur ini sering diincar penyerang untuk brute force SMB login atau melakukan enumerasi sistem
+
 3. Tekan Enter. Kamu akan melihat pesan error seperti "System error 86 has occurred. The specified network password is not correct." Ini berarti simulasi serangan gagal login kita sukses terekam.
 
-**Langkah 3: Mendetksi Log di Event Viewer**
+**Langkah 3: Mendeteksi Log di Event Viewer**
 1. Tekan `Win + R`, ketik `eventvwr.msc`, lalu tekan Enter.
 2. Di panel kiri, navigasikan ke **Windows Logs -> Security.**
 3. Di panel sebelah kanan (Actions), klik **Filter Current Log...**
