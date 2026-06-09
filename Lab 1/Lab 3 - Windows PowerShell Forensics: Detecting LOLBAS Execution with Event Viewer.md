@@ -5,7 +5,7 @@
 ## 🎯 Objective
 Lab ini memiliki tujuan yaitu Mencari tahu apa yang sebenarnya sedang diketik dan dijalankan oleh seorang *attacker* di **PowerShell**. tapi secara default **Windows** tidak mencatat setiap perintah di PowerShell yang diketik secara detail. oleh karena itu kita akan mengaktifkan **Script Block Logging** (sama seperti Lab 1) dan **Module Logging**, jadi *script* yang dijalankan/dieksekusi akan tercatat di **Event Viewer** pada EventID **4104** dan **4103**. Lab ini berfokus pada teknik **Blue Team (Defender)** jadi **attacker** sering menyalahgunakan program bawaan **Windows** yang sah seperti **PowerShell** untuk menjalankan perintah berbahaya, mengunduh malware atau mencuri data. Teknik ini disebut **LOLBAS(Living Off The Land Binaries)** Keutungan dari *attacker* ini tidak perlu mengunduh *tools* tambahan yang mudah terdeteksi oleh **Antivirus**
 
-## **EventID:4104**
+**EventID:4104**
 1. Disebut PowerShell Script Block Logging
 2. Mencatat isi script PowerShell yang benar-benar dieksekusi
 3. Ini lebih detail dibanding 4103
@@ -20,7 +20,7 @@ Bisa menampilkan:
 - script encoding / Base64
 - perintah bypass security
 
-## **EventID:4103**
+**EventID:4103**
 1. Disebut PowerShell Module Logging
 2. Mencatat modul atau command PowerShell yang dijalankan
 3. Fokusnya: apa perintah/modul yang dipanggil
