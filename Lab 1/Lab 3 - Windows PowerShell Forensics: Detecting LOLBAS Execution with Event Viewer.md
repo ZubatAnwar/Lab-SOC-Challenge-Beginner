@@ -59,4 +59,33 @@ Fungsi: Digunakan sebagai jalan pintas (workaround) pengganti lusrmgr.msc untuk 
 
 Fungsi: Ini adalah tool utama dalam lab ini. Digunakan untuk membaca, memfilter (mencari Event ID 4624 & 4625), dan menganalisis rekam jejak keamanan (Security Logs) pada sistem operasi Windows.
 
-## **Penjelasan**
+## **Eksekusi Lab**
+
+Jadi kita tidak menggunakan **Group Policy Editor (gpedit.msc)**, konfigurasi logging akan diaktifkan secara manual di **Registry Editor**.
+
+Sekarang buka PowerShell di VM jalankan sebagai **Administrator** lalu ikuti perintah dibawah ini. Tapi kok pakai PowerShell jadi ini bisa jalankan di Registry Editor (versi GUI) atau (versi CLI) nanti hasilnya juga tetap sama.
+
+**Cara 1: PowerShell**
+1. Mengaktifkan Script Block Logging
+   
+   `New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" -Force`
+
+   `Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" -Name "EnableScriptBlockLogging" -Value 1`
+
+3. Mengaktifkan Module Logging
+   
+   `New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging" -Force`
+
+   `Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging" -Name "EnableModuleLogging" -Value 1`
+
+**Cara 2: Registry Editor**
+
+1. Buka Registry Editor
+2. Masuk ke path `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell`
+3. Lalu klik kanan pada folder PowerShell -> New -> Key -> namai **ScriptBlockLogging / ModuleLogging**
+4. Pilih ScriptBlockLogging -> samping kanan ada ruang kosong klik kanan -> New -> **DWORD (32-bit) value** -> namai **EnableScriptBlockLogging / EnableModuleLogging** -> klik kanan pada lagi -> Modify -> Value nya diganti **1**
+5. Buat lagi untuk **Module Logging** sama seperti **ScriptBlockLogging**.
+
+*Setelah perintah ini dijalankan, sistem Windows 10 Home kamu sudah mulai merekam log PowerShell secara detail.*
+
+**Panduan Eksekusi**
