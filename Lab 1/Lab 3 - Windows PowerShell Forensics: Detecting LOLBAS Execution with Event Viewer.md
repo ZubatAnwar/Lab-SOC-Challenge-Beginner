@@ -105,8 +105,13 @@ Di PowerShell (Admin), jalankan perintah lab-nya:
 
 `Start-Process "notepad.exe" -ArgumentList "C:\Windows\System\drivers\etc\hosts"`
 
+<img width="854" height="256" alt="image" src="https://github.com/user-attachments/assets/bce1c691-51f8-43b9-b454-30d34a4624e1" />
+
+
 **2. Investigasi (Simulasi Defender):**
 - Buka Menu Start / Ikon Windows, ketik `Event Viewer`, lalu buka.
 - Navigasi ke direktori: `Applications and services Logs -> Microsoft -> Windows -> PowerShell -> Operational.`
 - Klik menu **"Filter Current Log"** disebelah kanan, dan masukan angka `4103` (atau `4104`) dikolom *Event ID*.
 - Cari *log* terbaru. Kamu akan melihat detail *Script* persis ang baru saja kamu jalankan, lengkap dengan waktu dan nama user.
+
+<img width="1023" height="708" alt="image" src="https://github.com/user-attachments/assets/20de92af-a3be-44f1-b392-851f6f2582d8" />
