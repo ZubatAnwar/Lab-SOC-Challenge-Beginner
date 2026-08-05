@@ -39,15 +39,25 @@ Bisa menampilkan:
 ## 🛡️ MITRE ATT&CK Mapping
 Aktivitas yang disimulasikan dalam lab ini dipetakan ke dalam framework MITRE ATT&CK:
 
-* **Tactic:** Credential Access (TA0006)
+* **Tactic: Execution (TA0002)**
 
-Penjelasan: Penyerang mencoba mendapatkan username dan password yang sah untuk masuk ke dalam sistem.
+Penjelasan: Attacker mencoba menjalankan kode berbahaya di sistem target.
 
-* **Technique:** Brute Force (T1110)
+* **Technique: Command and Scripting Interpreter - PowerShell (T1059.001)**
 
-Sub-Technique: Password Guessing (T1110.001)
+Penjelasan: Attacker menggunakan PowerShell untuk mengeksekusi perintah (seperti perintah `Start-Process` di lab ini).
 
-Penjelasan: Dalam lab ini, mencoba login berulang kali dengan password yang salah (WrongPassword) adalah representasi dari teknik password guessing.
+* **Tactic: Defense Evasion (TA0005)**
+
+Penjelasan: Attacker berusaha menghindari deteksi keamanan
+
+* **Technique: Masquerading / Obfuscated Files or Information (T1027) atau penggunaan LOLBAS**
+
+Penjelasan: Menggunakan tools sah (seperti PowerShell atau certutil) agar terlihat seperti aktivitas sistem normal
+
+* **Mitigation & Detection (Sisi Defender):**
+
+**Data Source:** Command Execution (DS0017). Menganalisis Event ID 4104 (Script Block Logging) dan 4103 (Module Logging) untuk menginspeksi argumen command-line yang mencurigakan
 
 ## **Praktikum:**
 Untuk lab ini perlu di siapkan yaitu:
@@ -89,3 +99,14 @@ Sekarang buka PowerShell di VM jalankan sebagai **Administrator** lalu ikuti per
 *Setelah perintah ini dijalankan, sistem Windows 10 Home kamu sudah mulai merekam log PowerShell secara detail.*
 
 **Panduan Eksekusi**
+
+**1. Eksekusi Perintah (Simulasi Attacker):**
+Di PowerShell (Admin), jalankan perintah lab-nya:
+
+`Start-Process "notepad.exe" -ArgumentList "C:\Windows\System\drivers\etc\hosts"`
+
+**2. Investigasi (Simulasi Defender):**
+- Buka Menu Start / Ikon Windows, ketik `Event Viewer`, lalu buka.
+- Navigasi ke direktori: `Applications and services Logs -> Microsoft -> Windows -> PowerShell -> Operational.`
+- Klik menu **"Filter Current Log"** disebelah kanan, dan masukan angka `4103` (atau `4104`) dikolom *Event ID*.
+- Cari *log* terbaru. Kamu akan melihat detail *Script* persis ang baru saja kamu jalankan, lengkap dengan waktu dan nama user.
