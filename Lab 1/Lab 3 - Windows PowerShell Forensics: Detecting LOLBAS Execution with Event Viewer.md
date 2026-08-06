@@ -115,3 +115,43 @@ Di PowerShell (Admin), jalankan perintah lab-nya:
 - Cari *log* terbaru. Kamu akan melihat detail *Script* persis ang baru saja kamu jalankan, lengkap dengan waktu dan nama user.
 
 <img width="1023" height="708" alt="image" src="https://github.com/user-attachments/assets/20de92af-a3be-44f1-b392-851f6f2582d8" />
+
+Tapi kok mengapa EventID 4104 yang muncul sedangkan 4103 tidak ini karean terletak ada cara kerja **Module Logging** di Windows.
+
+Mengapa Event ID 4103 Tidak Muncul?
+- **Event ID 4104 (Script Block Logging):** Sifatnya seperti saklar lampu. Begitu diaktifkan (seperti yang       kita lakukan dengan perintah registry sebelumnya), ia akan langsung mencatat semua script yang               dieksekusi.
+
+- **Event ID 4103 (Module Logging):** Sifatnya lebih spesifik. Mengubah nilai `EnableModuleLogging` menjadi `1` saja   tidak cukup. Windows membutuhkan instruksi tambahan: "Modul PowerShell mana saja yang harus saya catat?".Karena kita belum mendefinisikan nama modulnya, Windows tidak mencatat apa-apa.
+
+**Cara Memperbaiki agar Event 4103 Muncul (Tanpa gpedit.msc)**
+Agar EventID 4103 mencatat semua eksekusi modul (*Pipeline Execution Details*), kita harus menambahkan *key* `ModuleNames` di dalam Registry dan memberinya nilai `*` (Karakter *wildcard* yang berarti "Semua Modul").
+
+Buka kembali **PowerShell sebagai Administrator** dan jalankan dua baris perintah ini:
+
+4. 1. Membuat folder/key khusus untuk daftar nama modul
+   
+   `New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging" -Force`
+   
+   2. Menambahkan tanda bintang (*) yang menginstruksikan Windows untuk mencatat SEMUA modul
+   
+   `Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging" -Name "*" -Value "*"`
+   <img width="753" height="515" alt="image" src="https://github.com/user-attachments/assets/9a4e99ea-471b-4686-901c-3738dc3aa2a6" />
+
+
+**Langkah Pengujian Ulang:**
+1. **Tutup jendela PowerShell** yang sedang terbuka. (ini sangat penting agar PowerShell memuat ulang konfigurasi *registry* yang baru).
+2. Buka jendela **PowerShell baru**.
+3. Jalankan kembali perintah serangan lab kita:
+   `Start-Process "notepad.exe" -ArgumentList "C:\Windows\System32\drivers\etc\hosts"`
+4. Buka **Event Viewer** -> `Applications and services Logs -> Microsoft -> Windows -> PowerShell -> Operational.`
+5. Klik **Refresh** di panel kanan.
+Sekarang, jika mencari **EventID 4103**, *log* tersebut pasti muncul.
+
+<img width="1021" height="711" alt="image" src="https://github.com/user-attachments/assets/6a08182a-59ac-4fe2-bc21-004a20ff36b0" />
+
+
+**Catatan:**
+Perbedaan Keduannya:
+- *"Event 4104 menunjukkan apa kode asli yang dieksekusi (berguna jika attacker mencoba menyembunyikan kodenya)."* Artinya **Mencatat keseluruhan blok skrip PowerShell yang dijalankan. Sangat krusial untuk mendeteksi payload berbahaya karena fitur ini dapat mencatat script yang telah di-decode secara otomatis meskipun attacker menggunakan teknik obfuscation (seperti Base64).**
+
+- *"Event 4103 menunjukkan bagaimana perintah itu diproses oleh Windows beserta parameternya (berguna untuk melihat hasil akhir dari eksekusi tersebut)."* artinya **Mencatat proses eksekusi perintah secara spesifik beserta argumen/parameter yang mengikutinya (Pipeline Execution Details). Sangat berguna bagi analis untuk melihat hasil evaluasi akhir dari sebuah variabel atau argumen yang dituju oleh attacker.**
