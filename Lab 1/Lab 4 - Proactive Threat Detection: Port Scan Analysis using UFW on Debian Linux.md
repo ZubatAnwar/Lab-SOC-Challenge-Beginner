@@ -43,47 +43,136 @@ Penjelasan: Penyerang menggunakan Nmap untuk memindai IP Debian milikmu untuk me
 
 Penjelasan: Menggunakan firewall (UFW) untuk mendrop koneksi dari IP yang melakukan pemindaian yang agresif.
 
-## 🧠 **What is a Network Port Scan?**
+## 🧠 **Apa itu Network Port Scanning?**
 
-A **port scan** is a technique used by attackers to probe a system for open ports and active services. Tools like `nmap` are commonly used to map a system’s network surface.
+**Port scanning** adalah teknik mengirimkan paket data ke berbagai port jaringan pada komputer atau server untuk melihat port mana yang sedang terbuka, tertutup, atau disaring oleh firewall.
 
-### **Why It’s Dangerous**
-- Port scans are often a **precursor to exploitation**
-- They help attackers identify vulnerable services like open SSH, FTP, or outdated web servers
+Gampangnya, bayangkan server seperti rumah:
+
+- IP address = alamat rumah
+- Port = pintu-pintu di rumah
+- Port 80 = biasanya layanan HTTP
+- Port 443 = biasanya HTTPS
+- Port 22 = biasanya SSH
+
+Port scanning seperti mengecek pintu mana yang bisa dibuka atau merespons.
+
+Port scanning bisa digunakan untuk:
+
+- 🔍 Mengetahui layanan yang sedang berjalan
+- 🛡️ Audit keamanan server milik sendiri
+- 🔧 Troubleshooting koneksi jaringan
+- ⚠️ Dalam konteks serangan, mencari layanan yang mungkin punya kerentanan
+
+### **Tapi Kenapa Port Scanning Berbahaya?**
+Karena port scanning bisa menjadi langkah awal untuk menemukan celah keamanan, walaupun scanning itu sendiri belum tentu merupakan serangan.
+
+1. **Mengetahui layanan yang terbuka**
+Penyerang bisa melihat bahwa suatu server membuka SSH, HTTP, database, dan sebagainya.
+2. **Mencari informasi tentang sistem**
+Dari respons port, kadang bisa diketahui jenis layanan atau versinya.
+3. **Menentukan target serangan**
+Kalau ditemukan layanan yang memiliki kerentanan, penyerang bisa mencoba mengeksploitasinya.
+4. **Membebani atau mengganggu sistem**
+Scanning dalam jumlah sangat besar atau agresif dapat menghasilkan banyak trafik dan berpotensi mengganggu layanan.
 
 ---
+Nah Contoh Alat yang terkenal ialah **Nmap**.
+### Apa itu Nmap?
+Nmap (Network Mapper) adalah alat untuk memeriksa dan memetakan jaringan. Salah satu fungsi terkenalnya adalah port scanning.
 
-### What is Nmap?
-- Nmap (Network Mapper) is an open-source network scanning tool.
-- Used to discover hosts and services on a network.
-- Helps in identifying open ports, running services, and OS detection.
-- Commonly used for network inventory and vulnerability scanning.
+Dengan Nmap, bisa mengetahui misalnya:
 
+- 🖥️ Perangkat apa yang aktif di jaringan
+- 🚪 Port mana yang terbuka
+- 🔧 Layanan apa yang berjalan pada port tersebut
+- 🌐 Kadang bisa mengidentifikasi jenis/versi layanan
+- 🛡️ Membantu audit keamanan jaringan
 ---
 
 ### Nmap Popular Scan Types
-- SYN Scan (-sS): Fast and stealthy port scan.
-- TCP Connect Scan (-sT): Full TCP connection, less stealthy.
-- UDP Scan (-sU): Scans UDP ports for services.
-- Ping Scan (-sn): Checks which hosts are up, no port scan.
+1. **TCP SYN Scan**
+   Scan TCP yang populer dan relatif cepat. Nmap mengirim SYN untuk melihat apakah port merespons.
+   Contoh Scan:
+   (`nmap -sS <target>`)
+2. **TCP Connect Scan**
+   Membuat koneksi TCP secara penuh. Biasanya digunakan ketika SYN scan tidak tersedia.
+   (`nmap -sT <target>`)
+3. **UDP Scan**
+   Mencari layanan yang berjalan melalui UDP, bukan TCP.
+   (`nmap -sU <target>`)
+4. **Service/version detection**
+   Menggunakan paket TCP FIN untuk menguji respons port.
+   (`nmap -sV <target>`)
+5. **NULL Scan**
+   Mengirim paket TCP tanpa flag. Berguna untuk mempelajari perilaku implementasi TCP tertentu.
+   (`nmap -sN <target>`)
+6. **Xmas Scan**
+   Mengirim beberapa flag TCP sekaligus; namanya berasal dari flag yang dianggap “menyala” seperti lampu.
+   (`nmap -sX <target>`)
+7. **Ping/Host Discovery**
+   Mencari apakah host aktif tanpa melakukan port scan biasa.
+   (`nmap -sn <target>`)
 
-### 🔐 What is UFW?
-- UFW stands for Uncomplicated Firewall, a frontend for iptables.
-- Simplifies firewall management for Linux users.
-- Used to allow, deny, and manage traffic rules easily.
-- Logs are stored in `/var/log/ufw.log`.
-- Rule file `/etc/ufw/before.rules`
-- To check ufw status `ufw status`
-- To check the rule number `ufw status numbered`
+### 🔐 Apa itu UFW?
+UFW (Uncomplicated Firewall) adalah antarmuka sederhana untuk mengatur firewall pada sistem Linux. UFW dibuat agar pengguna tidak perlu berinteraksi langsung dengan konfigurasi firewall yang lebih kompleks seperti `iptables` atau `nftables`.
 
-###🧾 UFW Rule Syntax
-- Basic allow rule: ufw allow <port>
-- Deny a port: ufw deny <port>
-- Allow by service: ufw allow <service> (e.g., ufw allow ssh)
-- Allow by IP: ufw allow from <IP>
-- Allow specific port from IP: ufw allow from <IP> to any port <port>
-- Delete rule: ufw delete allow <port>
+Sederhananya:
+
+  **UFW menentukan koneksi jaringan mana yang boleh masuk atau ditolak oleh komputer.**
+
+  🧱 1. UFW bekerja sebagai firewall
+
+Firewall bisa dianggap seperti penjaga pintu.
+
+Misalnya:
+
+Internet
+    ↓
+┌─────────────┐
+│     UFW     │
+│  FIREWALL   │
+└─────────────┘
+    ↓
+  Server
+
+Ketika ada koneksi masuk, firewall dapat memeriksa aturan yang sudah dibuat.
+
+Contohnya:
+
+Ada koneksi ke port 22
+        ↓
+   UFW cek aturan
+        ↓
+    ALLOW ?
+      /   \
+    Ya    Tidak
+    ↓       ↓
+ Diterima  Ditolak
 
 
+###🧾 Syntax UFW yang Penting & Sering Digunakan
+1. **Melihat Status**
+   Melihat status UFW dan aturan yang aktif.
+   (`sudo ufw status`)
+2. **Mengaktifkan UFW**
+   Mengaktifkan firewall UFW dan menerapkan aturan yang sudah dibuat.
+   (`sudo ufw enable`)
+3. **Menonaktifkan UFW**
+   Menonaktifkan firewall UFW.
+   (`sudo ufw disable`)
+4. **Mengizinkan Port**
+   Mengizinkan koneksi masuk ke port tertentu.
+   (`sudo ufw allow <port>`)
+5. **Menolak Port**
+   Menolak koneksi masuk ke port tertentu.
+   (`sudo ufw deny <port>`)
+
+**Catatan: Link Dokumentasi Nmap dan UFW**
+*Nmap*
+https://nmap.org/docs.html
+
+*UFW*
+https://help.ubuntu.com/community/UFW
 
 ## 🧪 **Lab Task: Explore and Analyze Linux Syslog for Network Scans**
