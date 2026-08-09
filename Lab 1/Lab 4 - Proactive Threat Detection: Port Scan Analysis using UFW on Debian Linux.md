@@ -77,7 +77,7 @@ Kalau ditemukan layanan yang memiliki kerentanan, penyerang bisa mencoba mengeks
 Scanning dalam jumlah sangat besar atau agresif dapat menghasilkan banyak trafik dan berpotensi mengganggu layanan.
 
 ---
-Nah Contoh Alat yang terkenal ialah **Nmap**.
+Nah contoh alat yang terkenal ialah **Nmap**.
 ### Apa itu Nmap?
 Nmap (Network Mapper) adalah alat untuk memeriksa dan memetakan jaringan. Salah satu fungsi terkenalnya adalah port scanning.
 
