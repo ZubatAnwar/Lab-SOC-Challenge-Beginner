@@ -121,36 +121,6 @@ Sederhananya:
 
   **UFW menentukan koneksi jaringan mana yang boleh masuk atau ditolak oleh komputer.**
 
-  🧱 1. UFW bekerja sebagai firewall
-
-Firewall bisa dianggap seperti penjaga pintu.
-
-Misalnya:
-
-Internet
-    ↓
-┌─────────────┐
-│     UFW     │
-│  FIREWALL   │
-└─────────────┘
-    ↓
-  Server
-
-Ketika ada koneksi masuk, firewall dapat memeriksa aturan yang sudah dibuat.
-
-Contohnya:
-
-Ada koneksi ke port 22
-        ↓
-   UFW cek aturan
-        ↓
-    ALLOW ?
-      /   \
-    Ya    Tidak
-    ↓       ↓
- Diterima  Ditolak
-
-
 ###🧾 Syntax UFW yang Penting & Sering Digunakan
 1. **Melihat Status**
    Melihat status UFW dan aturan yang aktif.
