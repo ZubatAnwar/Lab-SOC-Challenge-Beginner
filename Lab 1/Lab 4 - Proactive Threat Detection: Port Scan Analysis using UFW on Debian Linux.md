@@ -139,6 +139,7 @@ Sederhananya:
    (`sudo ufw deny <port>`)
 
 **Catatan: Link Dokumentasi Nmap dan UFW**
+
 *Nmap*
 - https://nmap.org/docs.html
 
