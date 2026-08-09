@@ -140,9 +140,9 @@ Sederhananya:
 
 **Catatan: Link Dokumentasi Nmap dan UFW**
 *Nmap*
-https://nmap.org/docs.html
+- https://nmap.org/docs.html
 
 *UFW*
-https://help.ubuntu.com/community/UFW
+- https://help.ubuntu.com/community/UFW
 
 ## 🧪 **Lab Task: Explore and Analyze Linux Syslog for Network Scans**
