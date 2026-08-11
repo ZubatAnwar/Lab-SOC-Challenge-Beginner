@@ -146,4 +146,31 @@ Sederhananya:
 *UFW*
 - https://help.ubuntu.com/community/UFW
 
-## 🧪 **Lab Task: Explore and Analyze Linux Syslog for Network Scans**
+## 🧪 **PRAKTIKUM**
+*Catatan: Disini saya menggunakan Debian dan Linux Mint untuk melakukan Lab ini sebenernya bebas pakai OS Linux apa aja.*
+
+**Tahap 1: Persiapan Pertahanan (Di Terminal Debian)**
+1. Buka terminal Debian
+2. Install UFW dengan menjalankan perintah:
+   `sudo apt update && sudo apt install ufw -y`
+3. Aktifkan UFW (Ketik 'y' jika diminta konfirmasi)
+   `sudo ufw enable`
+4. Aktifkan pencatatan log tingkat tinggi agar aktivitas *scanning* terekam detail:
+   `sudo ufw logging high`
+5. Buat aturan untuk menolak koneksi ke port 80 secara spesifik dari IP mesin penyerang:
+   `sudo ufw deny from [IP_LINUX (attacker)] to any port 80 proto tcp
+6. Terapkan aturan yang baru saja dibuat:
+   `sudo ufw reload`
+   
+**Tahap 2: Monitoring Log secara Real-Time (Di Terminal Debian)**
+1. Masih di terminal **Debian**, jalankan perintah ini:
+   `sudo tail -f /var/log/ufw.log | grep "IP LINUX (attacker)"
+2. Terminal akan diam dan menunggu. Biarkan terminal tetap terbuka dan jangan tertutup.
+
+**Tahap 3: Simulasi Serangan Port Scan (Di Terminal Linux Mint)**
+1. Buka terminal **Linux Mint**
+2. Pastikan Nmap terinstal:
+   `sudo apt update && sudo apt install nmap -y`
+3. Luncurkan pemindaian *Stealt Scan (SYN Scan) ke port 80 milik target:
+   `sudo nmap -sS -p80 -Pn [IP Target Machine]`
+
