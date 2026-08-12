@@ -174,3 +174,33 @@ Sederhananya:
 3. Luncurkan pemindaian *Stealt Scan (SYN Scan) ke port 80 milik target:
    `sudo nmap -sS -p80 -Pn [IP Target Machine]`
 
+<img width="1340" height="234" alt="Cuplikan layar 2026-08-12 224000" src="https://github.com/user-attachments/assets/75371a2a-9366-499d-b996-48a20b10432e" />
+
+📖 **Penjelasan Analisis Log & Simulasi Serangan**
+
+**1. Sudut Pandang Penyerang (Terminal Kanan - Mesin Linux Mint)**
+Di sisi kanan, kita bertindak sebagai penyerang yang mencoba mencari celah keamanan di server target.
+ - Perintah: `sudo nmap -sS -p80 -Pn 10.0.2.4`
+    - Penyerang mengirimkan pemindaian *Stealth SYN Scan (`-sS`) yang menargetkan secara spesifik layanan web atau port
+      80 (-p80) pada IP target `10.0.2.4`
+ - Hasil tangkapan Nmap: `80/tcp filtered http`
+    - Perhatikan status `filtered` (disaring). Ini adalah tanda keberhasilan pertahanan! Jika port terbuka, statusnya          akan *open*, jika server mati statusnya closed. Status *filtered* berarti paket penyerang diabaikan atau dibuang         (drop) ditengah jalan oleh sebuah firewall, sehingga Nmap milik penyerang tidak bisa memastikan apakah port              tersebut sebenarnya terbuka atau tertutup.
+      
+2. **Sudut Pandang Pertahanan (Terminal Kiri - Mesin Debian)**
+Di sisi kiri, kita melihat apa yang sebenarnya terjadi di belakang layar pada mesin target (Debian) saat serangan itu datang.
+- Perintah: `sudo tail -f /var/log/ufw.log | grep "10.0.2.15"`
+   - Administrator server sedang memantau log firewall secara langsung (real-time) khusus untuk aktivitas yang berasal        dari IP penyerang `(10.0.2.15)`.
+     
+- Bedah Log UFW (Analisis Forensik):
+   - `2026-08-12T22:39:21` : **Timestamp (Waktu Kejadian)**. Menunjukkan kapan tepatnya paket jahat tersebut menyentuh         server.
+   - `[UFW AUDIT]` / `[UFW BLOCK]` : **Aksi**. Menandakan bahwa aturan Firewall (UFW) telah terpicu dan sistem melakukan       audit/pemblokiran lalu lintas.
+   - `IN=enp0s3` : **Interface Masuk**. Menunjukkan kartu jaringan mana yang menerima paket serangan tersebut.
+   - `SRC=10.0.2.15` : **Source IP***. Ini adalah alamat IP pelaku/penyerang. Terbukti bahwa serangan berasal dari mesin       Linux Mint.
+   - `DST=10.0.2.4` : **Destination IP**. Ini adalah IP mesin server kita (target).
+   - `PROTO=TCP` : **Protokol**. Serangan menggunakan protokol komunikasi TCP.
+   - `SPT=63175` : **Source Port (Port Asal)**. Port acak yang digunakan oleh Nmap penyerang untuk mengirim paket.
+   - `DPT=80` : **Destination Port (Port Tujuan)**. Ini membuktikan bahwa penyerang secara spesifik mengincar port 80          (HTTP).
+   - `SYN` : **TCP Flag**. Adanya label SYN di akhir log mengonfirmasi bahwa jenis serangan yang digunakan memang benar        SYN Scan, sesuai dengan argumen -sS yang diketik oleh penyerang.
+     
+**Kesimpulan:**
+Bahwa konfigurasi *Uncomplicated Firewall (UFW)* berfungsi dengan sempurna. Firewall tidak hanya berhasil mencegah penyerang mengidentifikasi status port 80 (ditandai dengan status *filtered* pada Nmap), tetapi juga berhasil merekam jejak digital penyerang (IP, Port, dan Waktu) dengan sangat akurat di dalam sistem log untuk keperluan investigasi keamanan (*Threat Hunting*).
