@@ -146,7 +146,7 @@ Sederhananya:
 *UFW*
 - https://help.ubuntu.com/community/UFW
 
-## 🧪 **PRAKTIKUM**
+## 🧪 **Eksekusi Lab**
 *Catatan: Disini saya menggunakan Debian dan Linux Mint untuk melakukan Lab ini sebenernya bebas pakai OS Linux apa aja.*
 
 **Tahap 1: Persiapan Pertahanan (Di Terminal Debian)**
