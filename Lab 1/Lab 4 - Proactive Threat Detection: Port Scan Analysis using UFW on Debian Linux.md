@@ -14,7 +14,7 @@ Lab ini berfokus pada **Blue Teaming (Pertahanan)**, dimana ini kita akana meman
 ## 🛠️ **Lab Setup**
 
 ### **System Requirements**
-- **Attacker Machine:**: Kali Linux
+- **Attacker Machine:**: Mint Linux
 - **Target Machine**: Debian Linux
 
 ### **Tools Needed**
