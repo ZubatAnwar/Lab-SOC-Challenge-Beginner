@@ -22,3 +22,25 @@ Struktur Data ICMP:
 - Identifier & Sequence No: Membantu mencocokkan Request mana yang dibalas oleh Reply mana (sangat berguna jika Anda mengirim banyak ping sekaligus).
 
 (*https://aws.amazon.com/id/what-is/icmp/*)
+
+## **🛠️ Bagian 2: Panduan Menyelesaikan Lab**
+
+1. **Buka Wireshark:** Jalankan aplikasi Wireshark dan buka file Sample PCAP yang telah Anda unduh.
+
+2. **Gunakan Filter:** Di kolom bar "Apply a display filter" (bagian atas), ketik icmp lalu tekan Enter. Ini akan menyembunyikan semua lalu lintas selain ICMP.
+
+3. **Analisis Paket Echo Request:**
+
+- Klik pada salah satu baris yang memiliki info Echo (ping) request.
+
+- Di panel tengah (Packet Details), buka bagian Internet Control Message Protocol.
+
+- Perhatikan nilai Type (8).
+
+4. **Analisis Paket Echo Reply:**
+
+- Klik pada baris di bawahnya yang berisi Echo (ping) reply.
+
+- Di panel tengah, lihat nilai Type (0).
+
+Perhatikan layar Wireshark Anda yang menunjukkan dengan jelas adanya baris Echo Request, Echo Reply, dan panel detail yang terbuka. Ini adalah hasil akhir (submission) Anda.
