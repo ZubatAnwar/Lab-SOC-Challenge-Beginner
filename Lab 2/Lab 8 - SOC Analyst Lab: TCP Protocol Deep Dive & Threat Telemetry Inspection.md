@@ -27,5 +27,5 @@ Di dalam setiap paket TCP, terdapat sekumpulan bit yang berfungsi sebagai "bende
 - RST (Reset): Memutus koneksi secara paksa (sering terjadi jika port tertutup atau ada gangguan firewall).
 
 - PSH (Push): Meminta agar data segera dikirim ke aplikasi tanpa harus menunggu buffer penuh.
-- 
+
 (*https://www.cloudns.net/blog/tcp-transmission-control-protocol-what-is-it-and-how-does-it-work/*)
