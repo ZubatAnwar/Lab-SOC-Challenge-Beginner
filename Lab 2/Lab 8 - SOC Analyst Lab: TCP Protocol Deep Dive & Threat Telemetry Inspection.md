@@ -29,3 +29,50 @@ Di dalam setiap paket TCP, terdapat sekumpulan bit yang berfungsi sebagai "bende
 - PSH (Push): Meminta agar data segera dikirim ke aplikasi tanpa harus menunggu buffer penuh.
 
 (*https://www.cloudns.net/blog/tcp-transmission-control-protocol-what-is-it-and-how-does-it-work/*)
+
+### **Key TCP Fields:**
+
+| Field Name           | Description                                  |
+|----------------------|----------------------------------------------|
+| **Source Port**      | Nomor port pengirim                          |
+| **Destination Port** | Nomor port penerima                          |
+| **Sequence Number**  | Nomor byte pertama dalam segmen              |
+| **Acknowledgment No**| Mengonfirmasi data yang telah diterima       |
+| **Flags**            | Bit kontrol (SYN, ACK, FIN, RST, PSH, URG)  |
+| **Window Size**      | Ukuran buffer yang tersedia                  |
+| **Checksum**         | Kolom untuk pemeriksaan kesalahan            |
+
+## 🔍 **Most Common TCP Display Filters**
+
+Gunakan filter berikut pada bar **Display Filter** di Wireshark:
+
+| Filter                    | Deskripsi                                  |
+|---------------------------|--------------------------------------------|
+| `tcp`                     | Menampilkan semua paket TCP                |
+| `tcp.flags.syn == 1`      | Menampilkan paket SYN (awal koneksi)       |
+| `tcp.flags.fin == 1`      | Menampilkan paket FIN (akhir koneksi)      |
+| `tcp.port == 80`          | Menampilkan paket TCP pada port 80         |
+| `ip.addr == 192.168.1.1`  | Menampilkan lalu lintas TCP ke/dari host tertentu |
+
+
+## 🧪 **Eksekusi Lab**
+
+https://github.com/0xrajneesh/90-Days-SOC-Challenge-Beginner/raw/refs/heads/main/Protocol_Analysis_pcap.pcapng
+
+Buka file PCAP sampel Anda menggunakan Wireshark. Untuk mengambil tangkapan layar (screenshot) yang diminta, ketikkan Display Filter berikut pada kolom filter di bagian atas Wireshark, lalu tekan Enter.
+
+1.**Tampilkan Semua Paket TCP:** 
+
+Ketikkan filter tcp di bar pencarian lalu Enter. Anda akan melihat semua lalu lintas yang murni menggunakan protokol TCP. Ambil screenshot.
+
+2.**Tampilkan Paket SYN:** 
+
+Ketikkan tcp.flags.syn == 1. Ini akan menyaring dan hanya menampilkan paket-paket yang sedang mencoba memulai koneksi. Ini sangat berguna untuk mendeteksi Port Scanning (seperti Nmap SYN Scan). Ambil screenshot.
+
+3.**Tampilkan Paket FIN:** 
+
+Ketikkan tcp.flags.fin == 1. Ini menampilkan paket-paket yang sedang dalam proses menutup koneksi secara normal. Ambil screenshot.
+
+4.**Filter Berdasarkan IP Spesifik:** 
+
+Pilih satu IP yang sering muncul di lab Anda (misalnya 192.168.1.1). Ketikkan ip.addr == 192.168.1.1 && tcp. Filter ini menggabungkan pencarian IP dan protokol TCP spesifik untuk host tersebut. Ambil screenshot.
