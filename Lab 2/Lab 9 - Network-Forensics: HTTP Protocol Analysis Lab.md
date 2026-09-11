@@ -76,3 +76,39 @@ Komunikasi HTTP terjadi seperti orang yang sedang bertanya dan menjawab:
 - 404 Not Found: Gagal! Halamannya tidak ada.
 
 - 500 Internal Server Error: Servernya sedang bermasalah/rusak.
+
+(Adversarial Tactics, Techniques, and Common Knowledge) adalah basis pengetahuan global yang dapat diakses secara gratis, berisi kumpulan taktik, teknik, dan prosedur (TTP) perilaku penyerang siber berdasarkan pengamatan di dunia nyata. Kerangka kerja ini dikembangkan oleh MITRE Corporation untuk membantu praktisi keamanan siber memahami cara kerja hacker. (https://attack.mitre.org/)
+
+Misalnya, dalam lab ini kita melihat ada traffic HTTP yang mencurigakan tanpa enkripsi. Kita bisa memetakannya ke MITRE ATT&CK:
+
+- Tactic: TA0011 - Command and Control (Malware sedang berkomunikasi ke server peretas).
+
+- Technique: T1071.001 - Application Layer Protocol: Web Protocols (Menggunakan HTTP port 80 untuk menyamar).
+
+## 🧪 Eksekusi Lab
+
+https://github.com/0xrajneesh/90-Days-SOC-Challenge-Beginner/raw/refs/heads/main/Protocol_Analysis_pcap.pcapng
+
+1. Temukan Target (IP & Domain Asli)
+
+- Buka file Protocol_Analysis_pcap.pcapng di Wireshark.
+
+- Ketik filter ini di kolom atas: http.request.method == "GET"
+
+- Pilih salah satu baris paket yang muncul.
+
+- Lihat panel tengah (Packet Details), perluas bagian Internet Protocol Version 4.
+
+- Catat Source IP (Ini adalah IP target/korban, masukkan ke bagian di laporan).
+
+- Catat Destination IP (Ini adalah IP Attacker atau C2 Server, masukkan ke bagian Laporan).
+
+2. Temukan IOC (Indicator of Compromise)
+
+- Masih di paket yang sama, perluas bagian Hypertext Transfer Protocol di panel tengah.
+
+- Cari baris Host:. (Ini adalah nama domain yang dituju oleh malware/attacker. Masukkan ke tabel IOC di laporan).
+
+- Cari baris Request URI:. (Ini adalah nama file atau path yang diminta, misalnya /login.php atau /download/payload.exe. Masukkan juga ke tabel IOC).
+
+- Cari baris User-Agent:. (Periksa apakah namanya aneh atau kosong. Jika aneh, ini bukti kuat malware beaconing).
