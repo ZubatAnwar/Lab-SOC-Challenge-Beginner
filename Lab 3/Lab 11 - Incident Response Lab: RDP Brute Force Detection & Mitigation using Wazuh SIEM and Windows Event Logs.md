@@ -22,3 +22,5 @@ Sebuah incident response plan yang efektif biasanya terdiri dari tujuh tahapan b
 - **Penanganan dan Forensik:** Pada tahap ini, langkah-langkah diambil untuk menghentikan ancaman, mencegah penyebaran lebih lanjut, dan mengumpulkan bukti forensik untuk investigasi atau tindakan hukum.
 - **Pemulihan:** Setelah ancaman teratasi, tim harus memulihkan sistem, baik dengan membersihkan malware, merestorasi data dari backup, atau memperbarui perangkat lunak agar sistem kembali berjalan normal.
 - **Evaluasi Insiden:** Tahap terakhir adalah mengevaluasi seluruh proses penanganan. Tujuannya adalah untuk memahami apa yang berjalan dengan baik, apa yang perlu diperbaiki, dan bagaimana mencegah insiden serupa di masa depan.
+
+(*https://csirt.or.id/pengetahuan-dasar/apa-itu-incident-response*)
