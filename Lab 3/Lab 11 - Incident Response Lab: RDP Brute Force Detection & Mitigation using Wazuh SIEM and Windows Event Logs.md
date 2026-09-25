@@ -9,8 +9,10 @@ Proses ini melibatkan langkah-langkah untuk mengendalikan insiden, memulihkan si
 - Menutup celah kerentanan yang dimanfaatkan oleh penyerang.
 - Memulihkan sistem dengan cepat.
 - Menjaga reputasi organisasi di mata pelanggan dan mitra bisnis.
-- 
+  
 Namun, untuk mencapai tujuan ini, organisasi harus memiliki incident response plan yang jelas dan terstruktur.
+
+Lab ini akan menyimulasikan serangan Brute Force pada layanan Remote Desktop Protocol (RDP) dan bagaimana seorang analis SOC merespons insiden tersebut menggunakan kerangka kerja Incident Response Plan (PICERL: Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned) yang terintegrasi dengan SIEM Waz
 
 ## 🔑 **Tahapan dalam Incident Response Plan**
 Sebuah incident response plan yang efektif biasanya terdiri dari tujuh tahapan berikut:
@@ -24,3 +26,35 @@ Sebuah incident response plan yang efektif biasanya terdiri dari tujuh tahapan b
 - **Evaluasi Insiden:** Tahap terakhir adalah mengevaluasi seluruh proses penanganan. Tujuannya adalah untuk memahami apa yang berjalan dengan baik, apa yang perlu diperbaiki, dan bagaimana mencegah insiden serupa di masa depan.
 
 (*https://csirt.or.id/pengetahuan-dasar/apa-itu-incident-response*)
+
+🗺️ MITRE ATT&CK Framework Mapping
+- **Tactic:** Credential Access (TA0006) | Initial Access (TA0001)
+
+- **Technique:** Brute Force (T1110) | Valid Accounts (T1078)
+
+- **Sub-Technique:** Password Guessing (T1110.001) | Local Accounts (T1078.003)
+
+🛠️ Topologi & Persyaratan Lab
+- **Attacker Machine:** Ubuntu Server (Dilengkapi Hydra & rockyou.txt)
+
+- **Target Machine:** Windows 10 / 11 (RDP Aktif)
+
+- **Monitoring/SIEM:** Wazuh Manager & Agent
+
+📶Jaringan:
+- Pastikan kedua mesin terhubung ke jaringan yang sama.
+
+⚙️Langkah-langkah Persiapan
+1. Pada Windows :
+Aktifkan RDP :
+`System Properties → Remote → Enable Remote Desktop`
+
+2. Izinkan RDP di Firewall :
+`Windows Defender Firewall → Advanced Settings → Inbound Rules → Remote Desktop (TCP-In) → Enable`
+
+🎯Simulasikan Serangan
+
+
+
+**Referensi Lab:**
+(*https://github.com/0xrajneesh/30-Days-SOC-Challenge-Beginner/blob/main/Challenge%233/Day%2311-%20Introduction%20to%20Incident%20Response.md*)
