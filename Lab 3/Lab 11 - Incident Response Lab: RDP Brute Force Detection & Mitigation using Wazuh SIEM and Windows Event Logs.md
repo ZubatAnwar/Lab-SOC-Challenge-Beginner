@@ -57,4 +57,5 @@ Aktifkan RDP :
 
 
 **Referensi Lab:**
+
 (*https://github.com/0xrajneesh/30-Days-SOC-Challenge-Beginner/blob/main/Challenge%233/Day%2311-%20Introduction%20to%20Incident%20Response.md*)
