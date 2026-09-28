@@ -37,6 +37,8 @@ Sebuah incident response plan yang efektif biasanya terdiri dari tujuh tahapan b
 🛠️ Topologi & Persyaratan Lab
 - **Attacker Machine:** Ubuntu Server (Dilengkapi Hydra & rockyou.txt)
 
+(*Catatan: Disini saya pakai ubuntu server ini terserah kalian pakai OS apa aja*)
+
 - **Target Machine:** Windows 10 / 11 (RDP Aktif)
 
 - **Monitoring/SIEM:** Wazuh Manager & Agent
@@ -54,7 +56,23 @@ Aktifkan RDP :
 
 🎯Simulasikan Serangan
 
+1. **Persiapan Target (Windows 10 Pro / Biasa):**
 
+- Buka Settings > System > Remote Desktop > Enable.
+
+- Buka Command Prompt (Admin) dan buat akun target:
+
+  `net user attackerlab Password123 /add`
+
+(Catatan: Akun ini akan memiliki Relative Identifier / RID unik, misalnya 1001, yang nantinya akan terekam dalam sistem ketika terjadi aktivitas).
+
+- Pastikan Wazuh Agent sudah terinstal, berjalan (Active), dan terhubung ke Wazuh Manager untuk membaca log Security.evtx.
+
+2. **Persiapan Attacker (Ubuntu Server):**
+
+- Instal tools Hydra: `sudo apt update && sudo apt install hydra -y`
+  
+- `wget [https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)`
 
 **Referensi Lab:**
 
