@@ -74,6 +74,33 @@ Aktifkan RDP :
   
 - `wget [https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt](https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt)`
 
+Setelah itu serangan diluncurkan dari mesin Ubuntu menggunakan Hydra:
+
+`hydra -t 4 -V -f -l attackerlab -P rockyou.txt [IP_KORBAN]`
+
+Dalam waktu kurang dari 2 menit, sistem pemantauan menangkap anomali jaringan.
+
+1. **Analisis Event Viewer:** Ditemukan lonjakan masif pada Event ID 4625 (Audit Failure). Logon Type tercatat sebagai 10 (Remote Interactive), yang mengonfirmasi bahwa percobaan masuk dilakukan melalui RDP, bukan secara fisik.
+
+2. **Analisis Wazuh SIEM:** Wazuh mengkorelasikan log kegagalan tersebut dan memicu alert tingkat ancaman tertinggi (Level 10).
+
+- **Rule ID:** 60204 (Windows: Multiple Logon Failures)
+
+- **Target Account:** attackerlab
+
+- **Source IP:** Menunjuk ke IP mesin Ubuntu.
+
+3. **Containment (Penahanan)**
+
+Setelah mengonfirmasi adanya serangan aktif (True Positive), langkah penahanan real-time dieksekusi untuk memutus koneksi penyerang dan mencegah keberhasilan kompromi.
+Aturan Inbound baru diterapkan melalui PowerShell untuk memblokir IP penyerang secara total:
+
+`New-NetFirewallRule -DisplayName "Block_Attacker_IP" -Direction Inbound -RemoteAddress **<IP_Ubuntu>** -Action Block`
+
+4. **Eradication (Pemberantasan)**
+
+`net user attackerlab /active:no`
+
 **Referensi Lab:**
 
 (*https://github.com/0xrajneesh/30-Days-SOC-Challenge-Beginner/blob/main/Challenge%233/Day%2311-%20Introduction%20to%20Incident%20Response.md*)
