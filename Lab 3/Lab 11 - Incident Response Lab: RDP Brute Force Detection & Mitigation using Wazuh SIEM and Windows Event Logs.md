@@ -95,7 +95,7 @@ Dalam waktu kurang dari 2 menit, sistem pemantauan menangkap anomali jaringan.
 Setelah mengonfirmasi adanya serangan aktif (True Positive), langkah penahanan real-time dieksekusi untuk memutus koneksi penyerang dan mencegah keberhasilan kompromi.
 Aturan Inbound baru diterapkan melalui PowerShell untuk memblokir IP penyerang secara total:
 
-`New-NetFirewallRule -DisplayName "Block_Attacker_IP" -Direction Inbound -RemoteAddress **<IP_Ubuntu>** -Action Block`
+`New-NetFirewallRule -DisplayName "Block_Attacker_IP" -Direction Inbound -RemoteAddress <IP_Ubuntu> -Action Block`
 
 4. **Eradication (Pemberantasan)**
 
