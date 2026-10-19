@@ -40,6 +40,63 @@ Sebuah incident response plan yang efektif biasanya terdiri dari tujuh tahapan b
 
 🎯Simulasikan Serangan
 
+**Tahap 1: Preparation (Persiapan Tool)**
+
+`sudo apt update
+sudo apt install curl lsof procps -y`
+
+**Tahap 2: Simulasi Serangan (Attack Simulation)**
+
+`mkdir ~/script-lab && cd ~/script-lab
+nano fakebackup.sh`
+
+Salin *script* berikut ke dalam editor nano.
+
+`#!/bin/bash
+echo "[*] Simulating backup operation..."
+sleep 600`
+
+Simpan file tersebut (tekan Ctrl+O, Enter, Ctrl+X). Lalu berikan hak eksekusi dan jalankan di background:
+
+`chmod +x fakebackup.sh
+./fakebackup.sh &`
+
+**Tahap 3: Detection and Analysis (Deteksi & Analisis)**
+
+Sekarang Anda berganti peran sebagai Analis SOC. Mari cari tahu script apa yang diam-diam berjalan di latar belakang:
+
+`ps aux | grep fakebackup.sh`
+
+Anda akan melihat output nama sistem, angka Process ID (PID), dan script-nya. Catat angka PID (biasanya di kolom kedua) dari script bash tersebut.
+
+Kemudian, cari tahu di direktori mana persisnya file ini bersembunyi (jika file itu tertanam di server aslinya):
+
+`find / -name "fakebackup.sh" 2>/dev/null`
+
+*Note: 2>/dev/null akan menyembunyikan error "Permission denied" sehingga output jauh lebih rapi.*
+
+**Tahap 4: Containment & Eradication (Isolasi & Pemusnahan)**
+
+Containment: Matikan paksa (Terminasi) proses dari script yang menginfeksi menggunakan angka PID yang sudah Anda catat.
+
+`kill -9 <GANTI_DENGAN_ANGKA_PID>`
+
+(Verifikasi kembali dengan menjalankan ps aux | grep fakebackup.sh untuk memastikan sudah tidak ada lagi).
+
+Eradication: Pemusnahan sumber masalah. Kita hapus file malicious tersebut!
+
+`rm -f ~/script-lab/fakebackup.sh`
+
+<img width="788" height="446" alt="Cuplikan layar 2026-10-07 205436" src="https://github.com/user-attachments/assets/b0267f06-6805-4369-bc35-20e4262e3cb3" />
+
+**Tahap 5: Recovery (Verifikasi Persistence)**
+
+Kita harus mengecek apakah penyerang menggunakan crontab agar malware bisa "hidup kembali" saat sistem direstart.
+
+`crontab -l
+sudo crontab -l`
+
+<img width="788" height="446" alt="Cuplikan layar 2026-10-07 205436" src="https://github.com/user-attachments/assets/7ea42f0e-998f-4b63-b9ff-cd5072c2c508" />
 
 
 **Referensi Lab:**
